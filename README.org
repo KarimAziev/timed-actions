@@ -1,0 +1,65 @@
+#+OPTIONS: ^:nil tags:nil num:nil
+
+* About
+
+Schedule and perform timed actions in Emacs.
+
+* Table of Contents                                       :TOC_2_gh:QUOTE:
+#+BEGIN_QUOTE
+- [[#about][About]]
+- [[#requirements][Requirements]]
+- [[#installation][Installation]]
+  - [[#with-use-package-and-straightel][With use-package and straight.el]]
+  - [[#manual-installation][Manual installation]]
+- [[#usage][Usage]]
+#+END_QUOTE
+
+* Requirements
+
+| Name  | Version |
+|-------+---------|
+| Emacs |    25.1 |
+
+
+* Installation
+
+** With use-package and straight.el
+#+begin_src elisp :eval no
+(use-package timed-actions
+  :demand t
+  :straight (timed-actions
+             :repo "KarimAziev/timed-actions"
+             :type git
+             :host github)
+  :config
+  (add-to-list 'timed-actions-events '(:time ("14:10" "Mon" "Wed")
+                                       :action browse-url
+                                       :args ("https://gnu.org")))
+  (timed-actions-schedule-events))
+#+end_src
+
+** Manual installation
+
+Download the source code and put it wherever you like, e.g. into =~/.emacs.d/timed-actions/=
+
+#+begin_src shell :eval no
+git clone https://github.com/KarimAziev/timed-actions.git ~/.emacs.d/timed-actions/
+#+end_src
+
+Add the downloaded directory to the load path:
+
+#+begin_src elisp :eval no
+(add-to-list 'load-path "~/.emacs.d/timed-actions/")
+(require 'timed-actions)
+#+end_src
+
+* Usage
+Customize your timed actions in the =timed-actions-events= variable and use =timed-actions-schedule-events= function to schedule these actions.
+
+For example:
+
+#+begin_src elisp
+(require 'timed-actions)
+(add-to-list 'timed-actions-events '(:time ("14:10" "Mon" "Wed") :action browse-url :args ("https://gnu.org")))
+(timed-actions-schedule-events)
+#+end_src
