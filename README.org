@@ -60,6 +60,9 @@ For example:
 
 #+begin_src elisp
 (require 'timed-actions)
-(add-to-list 'timed-actions-events '(:time ("14:10" "Mon" "Wed") :action browse-url :args ("https://gnu.org")))
+(add-to-list 'timed-actions-events '(:time ("14:10" "Mon" "Wed")
+                                     :action browse-url
+                                     :args ("https://gnu.org")))
+
 (timed-actions-schedule-events)
 #+end_src
