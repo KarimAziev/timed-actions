@@ -108,7 +108,7 @@ Example:
                       string
                       integer
                       sexp))))))
-  :group 'km)
+  :group 'timed-actions)
 
 
 (defvar timed-actions-dow-time-days '(("Monday" . 1)
@@ -421,17 +421,15 @@ Remaining arguments ARGS are the arguments to pass to FN when it is called."
        #'timed-actions-alert msg))))
 
 ;;;###autoload
-(defun timed-actions-alert (&optional status-message &rest rest)
+(defun timed-actions-alert (status-message &rest rest)
   "Display a notification with an optional status message.
 
 Optional argument STATUS-MESSAGE is a string for the notification message.
 
 Remaining arguments REST are additional properties for the notification."
-  (interactive)
+  (interactive "sMessage: ")
   (let ((args (list
-               :title (or
-                       status-message
-                       (read-string "Message: "))
+               :title status-message
                :urgency 'critical)))
     (let ((id))
       (while (setq id (pop timed-actions-alerts))
